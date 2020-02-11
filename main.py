@@ -24,7 +24,7 @@ seiNumber = input('Enter sei number: ')
 author = input('Who is the author: ')
 url = input('Whats the URL to the github repo: ')
 names_high = []
-inputChoice = input('Would you like to input name by name [1] or import through a file [2]?')
+inputChoice = input('Would you like to input name by name [1] or import through a file [2]?: ')
 if inputChoice == '1':
     with_user_input()
 elif inputChoice == '2':
