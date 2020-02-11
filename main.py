@@ -1,33 +1,56 @@
 import shutil
 import os
 
+
+def with_user_input():
+    print('Input the names one by one. When finished type exit and press enter')
+    isExit = True
+    while isExit:
+        input_name = input('Name: ')
+        if input_name.lower() == 'exit':
+            isExit = False
+        else:
+            names_high.append(input_name)
+
+
+def with_txt_input():
+    input('Input a list of names into names.txt - full name per line, and press enter when youre done')
+    input_file = open('names.txt', 'r')
+    for input_name in (raw.strip() for raw in input_file):
+        names_high.append(input_name)
+
+
 seiNumber = input('Enter sei number: ')
 author = input('Who is the author: ')
 url = input('Whats the URL to the github repo: ')
-print('Input the names one by one. When finished type exit and press enter')
-names = []
-isExit = True
-while isExit:
-    name = input('Name: ')
-    if name.lower() == 'exit':
-        isExit = False
-    else:
-        names.append(name)
-
-print(names)
-shutil.rmtree(f'sei{seiNumber}', ignore_errors=True)
-
-path = f'sei{seiNumber}'
-
-try:
-    os.mkdir(path)
-except OSError:
-    print("Creation of the directory %s failed" % path)
+names_high = []
+inputChoice = input('Would you like to input name by name [1] or import through a file [2]?')
+if inputChoice == '1':
+    with_user_input()
+elif inputChoice == '2':
+    with_txt_input()
 else:
-    # Create a readme file
-    with open(f"{path}/README.md", "w+") as f:
-        f.writelines(
-            f"""
+    print('Wrong input try again')
+
+if inputChoice == '1' or inputChoice == '2':
+    names = []
+    for high_name in names_high:
+        names.append(high_name.lower().replace(' ', '_'))
+
+    print(names)
+    shutil.rmtree(f'sei{seiNumber}', ignore_errors=True)
+
+    path = f'sei{seiNumber}'
+
+    try:
+        os.mkdir(path)
+    except OSError:
+        print("Creation of the directory %s failed" % path)
+    else:
+        # Create a readme file
+        with open(f"{path}/README.md", "w+") as f:
+            f.writelines(
+                f"""
 # SEi{seiNumber} ([General Assembly, Sydney](https://generalassemb.ly/sydney))
 
 ### Homework Repository
@@ -92,12 +115,12 @@ You need to do this every time you're submitting homework.
 If you want to follow up on any issues you had with the homework, the ideal time for that will be during the more unstructured lab time after lunch - come and see Joel or myself then and we can go over any outstanding questions.
 
 **Note:** if I haven't yet merged your Pull Request into my master homework repo before it's time to submit the next day's homework, you won't be able to create a new Pull Request. That's okay - for the new homework just add a new comment to the open (existing) Pull Request, featuring the same four points given above to describe your response to it.
-        """
-        )
-
-    with open(f"{path}/.gitignore", 'w+') as f:
-        f.writelines(
             """
+            )
+
+        with open(f"{path}/.gitignore", 'w+') as f:
+            f.writelines(
+                """
 .directory
 
 ### OSX ###
@@ -151,12 +174,12 @@ node_modules/
 /yarn-error.log
 
 .byebug_history
-            """
-        )
+                """
+            )
 
-    with open(f"{path}/pull_request_template.md", 'w+') as f:
-        f.writelines(
-            """
+        with open(f"{path}/pull_request_template.md", 'w+') as f:
+            f.writelines(
+                """
 - How difficult did you find this (out of 10)? 0 being no problems at all, 10 being impossible
 
 - Was there anything that you struggled with?
@@ -166,21 +189,21 @@ node_modules/
 - Is there anything that you'd like some further information on?
 
 - Roughly how long did it take?
-            """
-        )
-    for name in names:
-        try:
-            os.mkdir(f'sei{seiNumber}/{name}')
-        except OSError:
-            print("Creation of the directory %s failed" % path)
-        else:
-            with open(f'sei{seiNumber}/{name}/README.md', 'w+') as f:
-                f.writelines(
-                    f"""
+                """
+            )
+        for name in names:
+            try:
+                os.mkdir(f'sei{seiNumber}/{name}')
+            except OSError:
+                print("Creation of the directory %s failed" % path)
+            else:
+                with open(f'sei{seiNumber}/{name}/README.md', 'w+') as f:
+                    f.writelines(
+                        f"""
 # {name}
 ## Homework folder
-                    """
-                )
-            print(f'Created a folder for {name}')
+                        """
+                    )
+                print(f'Created a folder for {name}')
 
-print('Done!')
+    print('Done!')
