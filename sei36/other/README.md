@@ -1,4 +1,0 @@
-
-# other
-## Homework folder
-                    
