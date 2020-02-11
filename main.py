@@ -2,6 +2,8 @@ import shutil
 import os
 
 seiNumber = input('Enter sei number: ')
+author = input('Who is the author: ')
+url = input('Whats the URL to the github repo: ')
 print('Input the names one by one. When finished type exit and press enter')
 names = []
 isExit = True
@@ -43,14 +45,14 @@ else:
       - Hit the **Fork** button in the top right-hand corner of this page.
     - **Clone your forked repository to your computer**
       - _'Cloning' takes your 'forked' repository on GitHub and creates a local copy - or 'clone' - on your computer._
-      - Make sure you're browser is open to **your** forked version of this repository on Github (eg [http://github.com/{{YOUR_USERNAME}}/sei34-homework](http://github.com/{{YOUR_USERNAME}}/sei34-homework)).
+      - Make sure you're browser is open to **your** forked version of this repository on Github (eg [http://github.com/{{YOUR_USERNAME}}/sei{seiNumber}](http://github.com/{{YOUR_USERNAME}}/sei{seiNumber})).
       - Hit the **Clone or Download** button in the top right-hand corner of the page and copy the URL to your clipboard.
       - Open your computer's terminal to the directory in which you intend to store your homework.
       - `git clone url_of_your_fork_on_github` (where `url_of_your_fork_on_github` is the URL you copied after hitting 'Clone or Download', above).
     - **Add an upstream remote repository**
       - _Adding an upstream repository links the local repository on your computer to the original repository on Github (i.e. mine, the one from which you created the fork)_
       - `cd sei34-homework`
-      - `git remote add upstream https://github.com/amandachau36/sei34-homework.git`
+      - `git remote add upstream {url}`
       - `git pull upstream master`
     
     ### Do your Homework
@@ -76,7 +78,7 @@ else:
       - `git pull upstream master` - merge changes that have been made to this repository into your own local repository.
       - `git push origin master`
     - **Once you're finished, submit a pull request for me to accept your homework**
-      - Navigate to your forked version of this repository on Github (eg [https://github.com/{{YOUR_USERNAME_HERE}}/sei34-homework](https://github.com/{{YOUR_USERNAME_HERE}}/sei34-homework)).
+      - Navigate to your forked version of this repository on Github (eg [https://github.com/{{YOUR_USERNAME_HERE}}/sei{seiNumber}](https://github.com/{{YOUR_USERNAME_HERE}}/sei{seiNumber})).
       - Hit the **Pull request** button.
       - Make sure the destination for the pull request is set to my repository, not your own or anyone else's.
       * **IMPORTANT:** In the pull request comment, tell me the following:
